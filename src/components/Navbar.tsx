@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
 import { useAuth } from "../auth/useAuth";
 import UserMenu from "./UserMenu";
+import SearchBox from "./SearchBox";
 
 export default function Navbar() {
   const { user, isBooting, openAuthModal } = useAuth();
@@ -16,17 +16,7 @@ export default function Navbar() {
         SESSIONS
       </Link>
 
-      <div className="relative ml-auto w-[390px]">
-        <Search
-          size={14}
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/70"
-        />
-        <input
-          type="search"
-          placeholder="Search films and live events"
-          className="h-10 w-full rounded-full bg-white/10 pl-9 pr-4 text-xs outline-none placeholder:text-white/70"
-        />
-      </div>
+      <SearchBox />
 
       {isBooting ? (
         <div className="h-10 w-28" />
