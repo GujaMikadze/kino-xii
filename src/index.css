@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Archivo", system-ui, sans-serif;
+  --color-bg: #070C1C;
+  --color-surface: #080a1d;
+  --color-field: #1e1f35;
+  --color-accent: #e8310a;
+  --color-accent-hover: #ff3d14;
+  --color-success: #3ddc84;
+  --color-warning: #f59e0b;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: #fff;
+  font-family: var(--font-sans);
+}
