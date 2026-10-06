@@ -3,11 +3,13 @@ import { useAuth } from "../auth/useAuth";
 import UserMenu from "./UserMenu";
 import SearchBox from "./SearchBox";
 
-export default function Navbar() {
+export default function Navbar({ overlay = false }: { overlay?: boolean }) {
   const { user, isBooting, openAuthModal } = useAuth();
 
   return (
-    <header className="relative z-40 flex h-24 items-center gap-10 px-30">
+    <header className={`${
+        overlay ? "absolute inset-x-0 top-0" : "relative"
+      } z-40 flex h-24 items-center gap-10 px-30`}>
       <Link to="/" className="text-lg font-black tracking-wide">
         KINO <span className="text-accent">XII</span>
       </Link>

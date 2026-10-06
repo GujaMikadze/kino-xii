@@ -1,14 +1,18 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import { Outlet, useLocation } from "react-router-dom";
 import AuthModals from "../auth/AuthModals";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 export default function Layout() {
+  const isHome = useLocation().pathname === "/";
+
   return (
     <div className="min-h-screen">
-      <Navbar />
-      <main className="px-6 py-4">
+      <Navbar overlay={isHome} />
+      <main className={isHome ? "" : "px-30 pb-10"}>
         <Outlet />
       </main>
+      <Footer />
       <AuthModals />
     </div>
   );
