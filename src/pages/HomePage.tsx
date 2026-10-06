@@ -1,4 +1,5 @@
 import { useFilterOptions } from "../hooks/useFilterOptions";
+import Hero from "../features/home/Hero";
 
 export default function HomePage() {
   const { data, isLoading, error } = useFilterOptions();
@@ -7,9 +8,6 @@ export default function HomePage() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Home</h1>
-      <p>Venues: {data?.venues.map((v) => v.name).join(", ")}</p>
-    </div>
+    <Hero></Hero>
   );
 }
