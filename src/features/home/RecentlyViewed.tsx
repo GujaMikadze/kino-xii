@@ -8,25 +8,25 @@ export default function RecentlyViewed() {
 
   return (
     <section className="pt-8">
-      <h2 className="mb-4 px-30 text-sm font-extrabold">Recently viewed</h2>
-      <div className="no-scrollbar flex gap-4 overflow-x-auto px-30">
+      <h2 className="mb-5 px-15 text-[1.5rem] font-extrabold">Recently viewed</h2>
+      <div className="no-scrollbar flex gap-4 overflow-x-auto px-15">
         {items.map((m) => (
           <Link
             key={m.id}
             to={`/movies/${m.slug}`}
-            className="flex w-[300px] shrink-0 items-center gap-3 rounded-xl border border-white/5 bg-white/[0.04] p-2.5 hover:bg-white/[0.08]"
+            className="flex w-82.5 shrink-0 items-center gap-3 rounded-xl border border-white/5 bg-white/4 p-2.5 hover:bg-white/8"
           >
             {m.posterUrl ? (
-              <img src={m.posterUrl} alt="" className="h-14 w-10 rounded object-cover" />
+              <img src={m.posterUrl} alt="" className="h-16.75 w-21.75 rounded object-cover" />
             ) : (
-              <div className="h-14 w-10 rounded bg-field" />
+              <div className="h-16.75 w-21.75 rounded bg-field" />
             )}
             <div className="min-w-0">
-              <p className="truncate text-xs font-bold">{m.title}</p>
-              <p className="my-1 text-[11px] text-white/50">
+              <p className="truncate text-sm font-extrabold">{m.title}</p>
+              <p className="my-1 text-xs text-[#A9A9A9]">
                 {[m.genre, `${m.runtimeMinutes} min`].filter(Boolean).join(" · ")}
               </p>
-              <AgeBadge code={m.ageCode} />
+              <AgeBadge code={m.ageCode} className="py-1 px-2" />
             </div>
           </Link>
         ))}

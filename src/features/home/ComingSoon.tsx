@@ -9,6 +9,7 @@ import Skeleton from "../../components/Skeleton";
 import { useComingSoon } from "../../hooks/useMovies";
 import { inCinemasLabel, metaLine } from "../../lib/movie";
 import SectionHeader from "./SectionHeader";
+import { useDragScroll } from "../../hooks/useDragScroll";
 
 function NotifyButton({ slug }: { slug: string }) {
   const mutation = useMutation({
@@ -51,7 +52,7 @@ function ComingSoonCard({ movie }: { movie: Movie }) {
   const image = movie.backdropUrl ?? movie.posterUrl;
 
   return (
-    <article className="flex w-[520px] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/5 bg-white/[0.04]">
+    <article className="flex w-[520px] shrink-0 overflow-hidden rounded-2xl border border-white/5 bg-white/[0.04]">
       <div className="w-[200px] shrink-0 bg-field">
         {image && (
           <img src={image} alt="" className="size-full object-cover" loading="lazy" />
@@ -74,13 +75,13 @@ function ComingSoonCard({ movie }: { movie: Movie }) {
 
 export default function ComingSoon() {
   const { data, isLoading, isError, refetch } = useComingSoon();
-
+  const dragRef = useDragScroll();
   return (
-    <section className="py-8">
-      <SectionHeader title="Coming soon..." />
+    <section className="py-8 relative">
+      <SectionHeader title="Coming soon..." to="/sessions"/>
 
       {isLoading ? (
-        <div className="no-scrollbar flex gap-5 overflow-x-auto px-30" aria-busy="true">
+        <div className="no-scrollbar flex gap-5 overflow-x-auto px-15" aria-busy="true">
           {[0, 1, 2].map((i) => (
             <Skeleton key={i} className="h-[160px] w-[520px] shrink-0 rounded-2xl" />
           ))}
@@ -90,12 +91,14 @@ export default function ComingSoon() {
       ) : !data || data.length === 0 ? (
         <EmptyState title="No upcoming films yet" text="New releases will appear here." />
       ) : (
-        <div className="no-scrollbar flex snap-x scroll-px-30 gap-5 overflow-x-auto px-30 pb-2">
+        <div className="no-scrollbar flex drag-scroll gap-5 overflow-x-auto px-15 pb-2" ref={dragRef}>
           {data.map((movie) => (
             <ComingSoonCard key={movie.id} movie={movie} />
           ))}
         </div>
       )}
+
+      <div className="absolute right-0 top-0 h-full w-75 bg-[linear-gradient(to_right,transparent_0%,#070C1C_100%)]" />
     </section>
   );
 }

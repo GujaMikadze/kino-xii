@@ -7,10 +7,11 @@ import type { MovieWithSynopsis } from "../../api/types";
 import { useNowPlaying } from "../../hooks/useMovies";
 import { metaLine } from "../../lib/movie";
 import SectionHeader from "./SectionHeader";
+import { useDragScroll } from "../../hooks/useDragScroll";
 
 function NowPlayingCard({ movie }: { movie: MovieWithSynopsis }) {
   return (
-    <article className="w-[280px] shrink-0 snap-start rounded-3xl border border-white/5 bg-white/[0.04] p-3">
+    <article className="w-[280px] shrink-0 rounded-3xl border border-white/5 bg-white/[0.04] p-3">
       <Link to={`/movies/${movie.slug}`} className="block">
         <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-field">
           {movie.posterUrl && (
@@ -46,13 +47,14 @@ function NowPlayingCard({ movie }: { movie: MovieWithSynopsis }) {
 
 export default function NowPlaying() {
   const { data, isLoading, isError, refetch } = useNowPlaying();
+  const dragRef = useDragScroll();
 
   return (
-    <section className="py-8">
+    <section className="py-8 relative">
       <SectionHeader title="Now playing" to="/sessions" />
 
       {isLoading ? (
-        <div className="no-scrollbar flex gap-5 overflow-x-auto px-30" aria-busy="true">
+        <div className="no-scrollbar flex gap-5 overflow-x-auto px-15" aria-busy="true">
           {[0, 1, 2, 3, 4].map((i) => (
             <Skeleton key={i} className="h-[470px] w-[280px] shrink-0 rounded-3xl" />
           ))}
@@ -62,12 +64,14 @@ export default function NowPlaying() {
       ) : !data || data.length === 0 ? (
         <EmptyState title="Nothing is playing right now" text="Check back soon." />
       ) : (
-        <div className="no-scrollbar flex snap-x scroll-px-30 gap-5 overflow-x-auto px-30 pb-2">
+        <div className="no-scrollbar flex drag-scroll gap-5 overflow-x-auto px-15 pb-2" ref={dragRef}>
           {data.map((movie) => (
             <NowPlayingCard key={movie.id} movie={movie} />
           ))}
         </div>
       )}
+
+      <div className="absolute right-0 top-0 h-full w-75 bg-[linear-gradient(to_right,transparent_0%,#070C1C_100%)]" />
     </section>
   );
 }

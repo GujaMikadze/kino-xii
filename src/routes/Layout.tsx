@@ -9,7 +9,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen">
       <Navbar overlay={isHome} />
-      <main className={isHome ? "" : "px-30 pb-10"}>
+      <main className={isHome ? "" : "px-15 pb-10"}>
         <Outlet />
       </main>
       <Footer />

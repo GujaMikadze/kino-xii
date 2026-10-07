@@ -9,12 +9,12 @@ export default function Navbar({ overlay = false }: { overlay?: boolean }) {
   return (
     <header className={`${
         overlay ? "absolute inset-x-0 top-0" : "relative"
-      } z-40 flex h-24 items-center gap-10 px-30`}>
-      <Link to="/" className="text-lg font-black tracking-wide">
+      } z-40 flex items-center gap-8 px-15 pt-7.5 pb-10 bg-[linear-gradient(180deg,#000000_-212.35%,rgba(0,0,0,0.51)_32.09%,rgba(0,0,0,0)_93.93%)]`}>
+      <Link to="/" className="text-[1.25rem] tracking-wide font-extrabold text-white mr-1">
         KINO <span className="text-accent">XII</span>
       </Link>
 
-      <Link to="/sessions" className="text-xs font-bold tracking-wider">
+      <Link to="/sessions" className="text-xs font-semibold tracking-wider">
         SESSIONS
       </Link>
 
