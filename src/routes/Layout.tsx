@@ -4,12 +4,13 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 export default function Layout() {
-  const isHome = useLocation().pathname === "/";
+  const { pathname } = useLocation();
+  const fullBleed = pathname === "/" || pathname.startsWith("/movies/");
 
   return (
     <div className="min-h-screen">
-      <Navbar overlay={isHome} />
-      <main className={isHome ? "" : "px-15 pb-10"}>
+      <Navbar overlay={fullBleed} />
+      <main className={fullBleed ? "" : "px-15 pb-10 min-h-[calc(100vh-235px)]"}>
         <Outlet />
       </main>
       <Footer />
