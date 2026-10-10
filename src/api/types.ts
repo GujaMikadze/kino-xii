@@ -151,3 +151,18 @@ export type Order = {
     price: number;
   }[];
 };
+
+export type SessionGroup = { movie: Movie; sessions: Session[] };
+
+export type SessionsMeta = {
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  totalSessions: number;
+  totalMovies: number;
+  date: string;
+};
+
+export type SessionsResponse = { data: SessionGroup[]; meta: SessionsMeta };
+
+export type VenueSessions = { venue: Venue; sessions: Session[] };
