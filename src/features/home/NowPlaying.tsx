@@ -11,9 +11,9 @@ import { useDragScroll } from "../../hooks/useDragScroll";
 
 function NowPlayingCard({ movie }: { movie: MovieWithSynopsis }) {
   return (
-    <article className="w-[280px] shrink-0 rounded-3xl border border-white/5 bg-white/[0.04] p-3">
+    <article className="w-70 shrink-0 rounded-3xl bg-[#1E2031] p-3">
       <Link to={`/movies/${movie.slug}`} className="block">
-        <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-field">
+        <div className="aspect-59/75 overflow-hidden rounded-2xl bg-field">
           {movie.posterUrl && (
             <img
               src={movie.posterUrl}
@@ -23,20 +23,20 @@ function NowPlayingCard({ movie }: { movie: MovieWithSynopsis }) {
             />
           )}
         </div>
-        <h3 className="mt-4 truncate text-sm font-bold">{movie.title}</h3>
+        <h3 className="mt-2.5 truncate text-[1.125rem] font-extrabold">{movie.title}</h3>
       </Link>
-      <p className="mt-1 text-[11px] text-white/50">{metaLine(movie)}</p>
+      <p className="mt-1 text-xs text-[#A9A9A9]">{metaLine(movie)}</p>
       <div className="mt-2">
         <AgeBadge code={movie.ageRating.code} />
       </div>
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-2.5 flex items-center justify-between">
         <p className="text-xs">
-          <span className="text-white/60">From</span>{" "}
+          <span className="text-white">From</span>{" "}
           <span className="font-bold">₾ {movie.fromPrice}</span>
         </p>
         <Link
           to={`/movies/${movie.slug}`}
-          className="flex h-9 items-center rounded-full bg-accent px-5 text-xs font-bold hover:bg-accent-hover"
+          className="flex h-9 items-center rounded-full bg-accent px-5.5 text-sm font-bold hover:bg-accent-hover"
         >
           Buy Ticket
         </Link>
@@ -56,7 +56,7 @@ export default function NowPlaying() {
       {isLoading ? (
         <div className="no-scrollbar flex gap-5 overflow-x-auto px-15" aria-busy="true">
           {[0, 1, 2, 3, 4].map((i) => (
-            <Skeleton key={i} className="h-[470px] w-[280px] shrink-0 rounded-3xl" />
+            <Skeleton key={i} className="h-117.5 w-70 shrink-0 rounded-3xl" />
           ))}
         </div>
       ) : isError ? (
