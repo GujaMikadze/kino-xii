@@ -1,4 +1,6 @@
-const BASE = import.meta.env.VITE_API_URL as string;
+const BASE =
+  (import.meta.env.VITE_API_URL as string | undefined) ??
+  "https://api.kinoxii.redberryinternship.ge/api";
 
 export class ApiError extends Error {
     status: number;
